@@ -1,0 +1,113 @@
+.layout {
+  @apply
+  flex
+  flex-grow
+  bg-gray-300
+}
+
+.layout--navbar {
+  @apply
+  flex
+  justify-between
+  items-center
+  absolute
+  p-2
+  h-16
+  w-full
+  top-0
+  shadow-xl
+  text-white
+  bg-cyan-700
+}
+
+.layout--navbar--logo {
+  @apply
+  flex
+  items-center
+  justify-center
+  gap-2
+}
+
+.layout--navbar--logo--img {
+  @apply
+  flex
+  flex-shrink-0
+  justify-center
+  items-center
+  bg-center
+  bg-contain
+  bg-no-repeat
+  h-10
+  w-10
+}
+
+.layout--navbar--logo--text {
+  @apply
+  font-bold
+}
+
+
+.layout--navbar--search,
+.layout--navbar--search input {
+  @apply
+  flex
+  flex-grow
+  text-black
+  max-w-xl
+}
+
+.layout--navbar--logout {
+  @apply
+  flex
+  items-center
+  gap-2
+  font-bold
+}
+
+.layout--menu {
+  @apply
+  flex
+  flex-col
+  gap-1
+  p-2
+  pt-24
+  max-w-xs
+  w-full
+  shadow-sm
+  bg-gray-100
+}
+
+.layout--menu--item {
+  @apply
+  flex
+  items-center
+  gap-2
+  p-2
+  cursor-pointer
+  font-bold
+  text-gray-700
+
+  rounded-md
+  hover:bg-cyan-500
+  hover:text-white
+}
+
+.layout--menu--item--subitem {
+  @apply
+  pt-4
+}
+
+
+
+.layout--content {
+  @apply
+  flex
+  flex-grow
+  bg-white
+  p-2
+  pt-24
+}
+
+
+
+

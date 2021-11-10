@@ -1,0 +1,88 @@
+.signup {
+  @apply
+  flex
+  flex-col
+  flex-grow
+  justify-start
+  items-center
+  p-4
+  w-full
+  mt-6
+  mb-6
+  m-6
+  
+
+  bg-gray-100
+  rounded-md
+  shadow-md
+
+  sm:max-w-xl
+  sm:ml-auto
+  sm:mr-auto
+}
+
+
+.signup--header {
+  @apply
+  flex
+  flex-col
+  gap-2
+  text-center
+  justify-center
+  items-center
+  pb-6
+}
+
+.signup--header--logo {
+  @apply
+  flex
+  flex-shrink-0
+  bg-contain
+  bg-center
+  bg-no-repeat
+  h-16
+  w-16
+}
+
+.signup--form {
+  @apply
+  flex
+  flex-col
+  flex-grow
+  gap-4
+}
+
+.signup--form--personal {
+  @apply
+  flex
+  flex-wrap
+  justify-center
+  gap-4
+}
+
+.signup--footer {
+  @apply
+  flex
+  flex-col
+  w-full
+  gap-2
+  border-t
+  pt-4
+  mt-4
+  border-solid
+  border-gray-300
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
