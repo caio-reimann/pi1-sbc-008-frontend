@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Orça Fácil - Entrar</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+	
+	<script type="text/javascript" language="javascript">
+
+function send()
+{
+	document.getElementById("mainform").submit();
+}
+
+function teste_api()
+{
+var xhr = new XMLHttpRequest();
+var url = "https://pi1-sbc.herokuapp.com/autenticacao";
+xhr.open("POST", url, true);
+xhr.setRequestHeader("Content-Type", "application/json");
+alert('passou');
+xhr.onreadystatechange = function () {
+	alert('passou2');
+	alert('xhr.readyState: ' & xhr.readyState);
+	alert('xhr.status: ' & xhr.status);
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        var json = JSON.parse(xhr.responseText);
+        console.log(json.email + ", " + json.password);
+    }
+};
+
+var data = JSON.stringify({"email": "hey@mail.com", "password": "101010"});
+xhr.send(data);
+console.log(data);
+	alert('xhr.readyState: ' & xhr.readyState);
+	alert('xhr.status: ' & xhr.status);
+ 
+}
+
+function temp()
+{
+   var ajax = new XMLHttpRequest();
+
+// Seta tipo de requisição: Post e a URL da API
+ajax.open("POST", "https://pi1-sbc.herokuapp.com/autenticacao", true);
+ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+alert('passou')
+
+// Seta paramêtros da requisição e envia a requisição
+ajax.send("email=julianazk@gmail.com");
+alert(ajax.status);
+alert(ajax.readyState);
+// Cria um evento para receber o retorno.
+ajax.onreadystatechange = function() {
+  alert(ajax.status)
+  // Caso o state seja 4 e o http.status for 200, é porque a requisiçõe deu certo.
+	if (ajax.readyState == 4 && ajax.status == 200) {
+    
+		var data = ajax.responseText;
+		
+    // Retorno do Ajax
+		console.log(data);
+	}
+	alert('passou3')
+}
+}
+
+
+function callbackFunction(xmlhttp) 
+{
+    //alert(xmlhttp.responseXML);
+}
+</script>
+	
+  </head>
+  <body class="text-center">
+    
+<main class="form-signin">
+  <form id="mainform" method="post" action="../orcamentos/index.html">
+    <img class="mb-4" src="../assets/brand/logo.png" alt="" width="20%" height="20%">
+    <h1 class="h3 mb-3 fw-normal">Entrar</h1>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" placeholder="nome@exemplo.com.br">
+      <label for="floatingInput">E-mail</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Senha">
+      <label for="floatingPassword">Senha</label>
+    </div>
+
+
+    <button class="w-100 btn btn-lg btn-primary" type="button" onclick="javascript:send()">Entrar</button>
+    <p class="mt-5 mb-3 text-muted">&copy; Projeto Integrador - Grupo 08 - 2021</p>
+  </form>
+</main>
+
+
+    
+  </body>
+</html>
