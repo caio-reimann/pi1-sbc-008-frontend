@@ -21,7 +21,7 @@ export const Api = async ({endpoint, method, data, token}) => {
     });
     const content = await rawResponse.json();
 
-    console.log(content);
+    console.log("API", content, token);
     return content;
 };
 

@@ -2,14 +2,12 @@
   @apply
   flex
   flex-col
-  flex-grow
+  /* flex-grow */
   justify-start
   items-center
   p-4
   w-full
-  mt-6
-  mb-6
-  m-6
+  m-auto
   
 
   bg-gray-100
@@ -48,7 +46,7 @@
   @apply
   flex
   flex-col
-  flex-grow
+  /* flex-grow */
   gap-4
 }
 
@@ -78,23 +76,31 @@
   @apply
   flex
   flex-col
-}
-
-.signup--form--item--full input {
-  @apply
-  flex
-  flex-grow
   flex-1
 }
-
 
 .full {
   @apply
   flex
+  flex-grow
   gap-4
 }
 
-
+.signup--alerts {
+  @apply
+  flex
+  flex-grow
+  justify-start
+  items-start
+  bg-red-700
+  text-white
+  font-bold
+  pl-4
+  pr-4
+  rounded-md
+  text-sm
+  text-left
+}
 
 
 

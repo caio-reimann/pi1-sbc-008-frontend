@@ -9,7 +9,7 @@ const validateEmail = (email) => {
     return re.test(email);
   }
 
-export const Login = ({setIsAuthenticated, setToken}) => {
+export const Login = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [message, setMessage] = React.useState('');
@@ -65,9 +65,7 @@ export const Login = ({setIsAuthenticated, setToken}) => {
             };
 
             if(res.access_token){
-                setToken(res.access_token);
-                setIsAuthenticated(true);
-                navigate('/', { replace: true });
+                navigate(`/app?token=${res.access_token}`, { replace: true });
             };
         });
     };

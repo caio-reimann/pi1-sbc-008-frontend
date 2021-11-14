@@ -4,11 +4,10 @@ import { MdLogout, MdHome } from 'react-icons/md';
 import {Link, useNavigate} from 'react-router-dom';
 
 
-export const Layout = ({children, setIsAuthenticated}) => {
+export const Layout = ({children}) => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        setIsAuthenticated(false);
         navigate('/login', { replace: true });
     };
 
@@ -23,10 +22,6 @@ export const Layout = ({children, setIsAuthenticated}) => {
                     </div>
                 </Link>
 
-                <div className='layout--navbar--search'>
-                    <input type='search' placeholder='Digite algo aqui para pesquisar' />
-                </div>
-
                 <div className='layout--navbar--logout' onClick={handleLogout}>
                     Sair
                     <MdLogout />
@@ -34,7 +29,7 @@ export const Layout = ({children, setIsAuthenticated}) => {
             </div>
 
             <div className='layout--menu'>
-                <Link to={'/'}>
+                <Link to={'/app'}>
                     <div className='layout--menu--item'>
                         <MdHome />
                         Início
