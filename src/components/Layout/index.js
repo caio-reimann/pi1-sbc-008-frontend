@@ -1,6 +1,6 @@
 import './style.css';
 import Logo from '../../assets/brand/logo.png';
-import { MdLogout, MdHome } from 'react-icons/md';
+import { MdLogout } from 'react-icons/md';
 import {Link, useNavigate} from 'react-router-dom';
 
 
@@ -15,7 +15,7 @@ export const Layout = ({children}) => {
         <div className='layout'>
             <div className='layout--navbar'>
 
-                <Link to={'/'}>
+                <Link to={'/app'}>
                     <div className='layout--navbar--logo'>
                         <div className='layout--navbar--logo--img' style={{backgroundImage: `url(${Logo})`}}></div>
                         <div className='layout--navbar--logo--text'>Orça Fácil</div>
@@ -28,7 +28,7 @@ export const Layout = ({children}) => {
                 </div>
             </div>
 
-            <div className='layout--menu'>
+            {/* <div className='layout--menu'>
                 <Link to={'/app'}>
                     <div className='layout--menu--item'>
                         <MdHome />
@@ -74,7 +74,7 @@ export const Layout = ({children}) => {
                         Relatório anual
                     </div>
                 </Link>
-            </div>
+            </div> */}
 
             <div className='layout--content'>
                 {children}

@@ -2,12 +2,11 @@ import './style.css';
 import React from 'react';
 import {Api} from '../../context/Api';
 import {useLocation} from "react-router-dom";
-import { MdAdd, MdEmail } from 'react-icons/md';
+import { MdAdd, MdDelete, MdEmail } from 'react-icons/md';
 import { FaWhatsapp } from "react-icons/fa";
-import {Link} from "react-router-dom";
 
 
-const Cadastrar = ({token, setCadastrarNovo}) => {
+const Cadastrar = ({token, setCadastrarNovo, setTroca, troca}) => {
     let [messages, setMessages] = React.useState([]);
     let [data, setData] = React.useState({
         nome: "",
@@ -61,6 +60,7 @@ const Cadastrar = ({token, setCadastrarNovo}) => {
             } else {
                 alert('Orçamento cadastrado com sucesso!');
                 setCadastrarNovo(false);
+                setTroca(!troca)
             }
         });
     };
@@ -90,34 +90,56 @@ export const Budget = () => {
     let [params, setParams] = React.useState(new URLSearchParams(location.search));
     let token = params.get('token');
     let [orcamentos, setOrcamentos] = React.useState([]);
+    let [orcamentosFiltered, setOrcamentosFiltered] = React.useState(orcamentos);
     let [cadastrarNovo, setCadastrarNovo] = React.useState(false);
+    let [troca, setTroca] = React.useState(false);
 
     React.useEffect(() => {
-        Api({endpoint:'orcamentos', method:'GET', token:token}).then(res => setOrcamentos(res.orcamentos))
-    }, [token]);
+        Api({endpoint:'orcamentos', method:'GET', token:token}).then(res => setOrcamentos(res.orcamentos));
+        setOrcamentosFiltered(orcamentos);
+    }, [troca]);
 
-    const handleSendEmail = () => {
-        console.log('enviar email');
+    const handleDelete = (id) => {
+        console.log('deleta');
+        Api({endpoint:`orcamento/${id}`, method:'DELETE', token:token}).then(res => {
+            if(res == null){
+                alert('Registro deletado!');
+            } else {
+                alert(res.message);
+            }
+        });
+        setTroca(!troca);
     };
 
-    const handleSendWhatsApp = () => {
-        console.log('enviar email');
+    const handleFilter = (e) => {
+        if(e.target.value.length > 0){
+            setOrcamentos(
+                orcamentos.filter(item => (
+                    (item.nome.indexOf(e.target.value) >= 0)
+                    | (item.descricao.indexOf(e.target.value) >= 0)
+                    | (item.email.indexOf(e.target.value) >= 0)
+                ))
+            )
+        } else {
+            setTroca(!troca);
+        }
+        
     };
 
     return (
         <div className='budget'>
             <div className='budget--new'>
                 <div className='layout--navbar--search'>
-                    <input type='search' placeholder='Digite algo aqui para pesquisar' />
+                    <input type='search' placeholder='Digite algo aqui para pesquisar' onChange={(e) => handleFilter(e)}/>
                 </div>
 
-                <div className='budget--new--button' onClick={() => setCadastrarNovo(true)}>
-                    <MdAdd />
-                    Cadastrar novo
+                <div className='budget--new--button' onClick={() => setCadastrarNovo(!cadastrarNovo)}>
+                    {!cadastrarNovo ? <MdAdd /> : ''}
+                    {!cadastrarNovo ? 'Cadastrar novo' : 'Voltar'}
                 </div>
             </div>
             {cadastrarNovo ? (
-                <Cadastrar token={token} setCadastrarNovo={setCadastrarNovo}/>
+                <Cadastrar token={token} setCadastrarNovo={setCadastrarNovo} setTroca={setTroca} troca={troca}/>
             ) : (
                 orcamentos.map(data => (
                     <div className='budget--item--row' key={data.id}>
@@ -127,39 +149,48 @@ export const Budget = () => {
 
                             <div className='text-header'>{data.nome}</div>
 
-                            {data.email && <Link to={`mailto:${data.email}`}>
+                            {data.email && <a target='_blank' href={`mailto:${data.email}`}>
                                 <div className='budget--item--row--user--item'>
                                     <div className='text-body italic'>{data.email}</div>
                                     <MdEmail />
                                 </div>
-                            </Link>}
+                            </a>}
 
-                            {data.tel_celular && <Link to={`https://api.whatsapp.com/send?phone=55:${data.tel_celular.replace(/\D+/g, '')}`}>
+                            {data.tel_celular && 
                                 <div className='budget--item--row--user--item'>
                                     <div className='text-body italic'>{data.tel_celular}</div>
-                                    <FaWhatsapp />
+                                    <a target='_blank' href={`https://api.whatsapp.com/send?phone=55:${data.tel_celular.replace(/\D+/g, '')}`}>
+                                        <FaWhatsapp />
+                                    </a>
                                 </div>
-                            </Link>}
+                            }
                         </div>
 
                         <div className='budget--item--row--place'>
                             <div className='text-header'>Local</div>
                             <div className='divider'></div>
 
-                            <div className='text-body'>Endereço: {data.logradouro}</div>
-                            <div className='text-body'>Número: {data.numero}</div>
-                            <div className='text-body'>Bairro: {data.bairro}</div>
-                            <div className='text-body'>Cidade: {data.cidade}</div>
-                            <div className='text-body'>Estado: {data.uf}</div>
+                            <div className='text-body'><span className='font-bold'>Endereço:</span> {data.logradouro}</div>
+                            <div className='text-body'><span className='font-bold'>Número:</span> {data.numero}</div>
+                            <div className='text-body'><span className='font-bold'>Bairro:</span> {data.bairro}</div>
+                            <div className='text-body'><span className='font-bold'>Cidade:</span> {data.cidade}</div>
+                            <div className='text-body'><span className='font-bold'>Estado:</span> {data.uf}</div>
                         </div>
 
                         <div className='budget--item--row--budget'>
                             <div className='text-header'>Orçamento</div>
                             <div className='divider'></div>
 
-                            <div className='text-body'>Data: {data.data_inicio}</div>
-                            <div className='text-body'>Prazo: {data.prazo}</div>
-                            <div className='text-body'>Descrição: {data.descricao}</div>
+                            <div className='text-body'><span className='font-bold'>Data:</span> {data.data_inicio}</div>
+                            <div className='text-body'><span className='font-bold'>Prazo:</span> {data.prazo}</div>
+                            <div className='text-body'><span className='font-bold'>Descrição:</span> {data.descricao}</div>
+
+                            <div className='budget--item--row--budget--buttons'>
+                                <div className='button' onClick={() => handleDelete(data.id)}>
+                                    Deletar
+                                    <MdDelete />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 ))
