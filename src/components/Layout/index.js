@@ -1,50 +1,61 @@
 import './style.css';
 import Logo from '../../assets/brand/logo.png';
 import { MdLogout, MdHome } from 'react-icons/md';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
-export const Layout = ({children}) => {
+
+export const Layout = ({children, setIsAuthenticated}) => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        setIsAuthenticated(false);
+        navigate('/login', { replace: true });
+    };
+
     return (
         <div className='layout'>
             <div className='layout--navbar'>
-                <div className='layout--navbar--logo'>
-                    <div className='layout--navbar--logo--img' style={{backgroundImage: `url(${Logo})`}}></div>
-                    <div className='layout--navbar--logo--text'>Orça Fácil</div>
-                </div>
+
+                <Link to={'/'}>
+                    <div className='layout--navbar--logo'>
+                        <div className='layout--navbar--logo--img' style={{backgroundImage: `url(${Logo})`}}></div>
+                        <div className='layout--navbar--logo--text'>Orça Fácil</div>
+                    </div>
+                </Link>
 
                 <div className='layout--navbar--search'>
                     <input type='search' placeholder='Digite algo aqui para pesquisar' />
                 </div>
 
-                <div className='layout--navbar--logout'>
+                <div className='layout--navbar--logout' onClick={handleLogout}>
                     Sair
                     <MdLogout />
                 </div>
             </div>
 
             <div className='layout--menu'>
-                <Link to={''}>
+                <Link to={'/'}>
                     <div className='layout--menu--item'>
                         <MdHome />
                         Início
                     </div>
                 </Link>
 
-                <Link to={''}>
+                <Link to={'/orcamentos'}>
                     <div className='layout--menu--item'>
                         <MdHome />
                         Orçamentos
                     </div>
                 </Link>
 
-                <Link to={''}>
+                <Link to={'/servicos'}>
                     <div className='layout--menu--item'>
                         <MdHome />
                         Serviços
                     </div>
                 </Link>
 
-                <Link to={''}>
+                <Link to={'/clientes'}>
                     <div className='layout--menu--item'>
                         <MdHome />
                         Clientes
@@ -55,14 +66,14 @@ export const Layout = ({children}) => {
                     <div className='text-body uppercase'>RELATÓRIOS</div>
                 </div>
 
-                <Link to={''}>
+                <Link to={'/relatorio/mensal'}>
                     <div className='layout--menu--item'>
                         <MdHome />
                         Mês atual
                     </div>
                 </Link>
 
-                <Link to={''}>
+                <Link to={'/relatorio/anual'}>
                     <div className='layout--menu--item'>
                         <MdHome />
                         Relatório anual

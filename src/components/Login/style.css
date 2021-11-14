@@ -2,11 +2,13 @@
   @apply
   flex
   flex-col
+  flex-grow
   justify-center
   items-center
   m-auto
   p-10
   gap-10
+  bg-white
 
   sm:flex-row
 }
@@ -81,6 +83,27 @@
   gap-1
 }
 
+.login--message {
+  @apply
+  p-2
+  bg-red-600
+  rounded-md
+  mt-2
+  mb-2
+  text-white
+}
 
+.login--message--off {
+  @apply
+  hidden
+}
+
+
+.login--forgot {
+  @apply
+  italic
+  cursor-pointer
+  underline
+}
 
 

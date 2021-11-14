@@ -1,0 +1,46 @@
+.fourohfour {
+    @apply
+    flex
+    flex-col
+    gap-4
+    justify-center
+    items-center
+    sm:max-w-7xl
+    sm:m-auto
+}
+
+.fourohfour--image {
+    @apply
+    flex
+    justify-center
+    items-center
+    bg-contain
+    bg-center
+    bg-no-repeat
+    h-60
+    w-full
+    mb-10
+}
+
+.fourohfour > h1 {
+    @apply
+    sm:pl-10
+    sm:pr-10
+}
+
+.fourohfour a {
+    @apply
+    flex
+    w-60
+    mt-10
+}
+
+
+
+.button {
+    @apply
+    gap-4
+    pl-4
+    pr-4
+}
+

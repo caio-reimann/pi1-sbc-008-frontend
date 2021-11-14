@@ -60,7 +60,8 @@
   gap-4
 }
 
-.signup--footer {
+.signup--footer,
+.divider {
   @apply
   flex
   flex-col
@@ -73,10 +74,25 @@
   border-gray-300
 }
 
+.signup--form--item {
+  @apply
+  flex
+  flex-col
+}
+
+.signup--form--item--full input {
+  @apply
+  flex
+  flex-grow
+  flex-1
+}
 
 
-
-
+.full {
+  @apply
+  flex
+  gap-4
+}
 
 
 

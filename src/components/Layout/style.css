@@ -12,6 +12,8 @@
   items-center
   absolute
   p-2
+  pl-4
+  pr-4
   h-16
   w-full
   top-0
@@ -26,6 +28,7 @@
   items-center
   justify-center
   gap-2
+  cursor-pointer
 }
 
 .layout--navbar--logo--img {
@@ -60,8 +63,10 @@
   @apply
   flex
   items-center
+  p-2
   gap-2
   font-bold
+  cursor-pointer
 }
 
 .layout--menu {

@@ -1,53 +1,72 @@
-/* globals Chart:false, feather:false */
+import React from 'react';
+// const axios = require('axios');
 
-(function () {
-  'use strict'
+// export const instance = axios.create({
+//     baseURL: 'https://pi1-sbc.herokuapp.com/',
+//     // timeout: 5000,
+//     headers: {'Content-Type': 'application/json'},
+//     responseType: 'json',
+//     responseEncoding: 'utf8',
+// });
 
-  feather.replace({ 'aria-hidden': 'true' })
+export const Api = async ({endpoint, method, data, token}) => {
+    const rawResponse = await fetch('https://pi1-sbc.herokuapp.com/' + endpoint, {
+        method: method ? method : 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token ? token : ''}`,
+        },
+        body: JSON.stringify(data)
+    });
+    const content = await rawResponse.json();
 
-  // Graphs
-  var ctx = document.getElementById('myChart')
-  // eslint-disable-next-line no-unused-vars
-  var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday'
-      ],
-      datasets: [{
-        data: [
-          15339,
-          21345,
-          18483,
-          24003,
-          23489,
-          24092,
-          12034
-        ],
-        lineTension: 0,
-        backgroundColor: 'transparent',
-        borderColor: '#007bff',
-        borderWidth: 4,
-        pointBackgroundColor: '#007bff'
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: false
-          }
-        }]
-      },
-      legend: {
-        display: false
-      }
-    }
-  })
-})()
+    console.log(content);
+    return content;
+};
+
+
+
+// instance.post('autenticacao', {
+//     email: 'teste@teste.com',
+//     password: 'teste'
+// }).then(({data}) => {
+//     console.log(data)
+// });
+
+// instance.post('autenticacao', {
+//     email: 'teste@teste.com',
+//     password: 'teste'
+// }).then(({data}) => {
+//     console.log(data)
+// });
+
+// instance.post('usuario', {
+//     "bairro": "string",
+//     "cep": "string",
+//     "cidade": "string",
+//     "complemento": "string",
+//     "email": "string",
+//     "identidade": "string",
+//     "info_complementar": "string",
+//     "logradouro": "string",
+//     "nome": "string",
+//     "numero": "string",
+//     "profissao": "string",
+//     "sexo": "M",
+//     "sobrenome": "string",
+//     "tel_celular": "string",
+//     "tel_comercial": "string",
+//     "tel_comercial2": "string",
+//     "tel_comercial3": "string",
+//     "uf": "AC"
+//   }).then(({data}) => {
+//     console.log(data)
+// });
+
+
+
+
+
+
+
