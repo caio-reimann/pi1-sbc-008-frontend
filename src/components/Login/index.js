@@ -65,7 +65,9 @@ export const Login = () => {
             };
 
             if(res.access_token){
+                console.log(`/app?token=${res.access_token}`);
                 navigate(`/app?token=${res.access_token}`, { replace: true });
+                return <Navigate to={`/app?token=${res.access_token}`} />
             };
         });
     };

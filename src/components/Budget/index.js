@@ -90,13 +90,11 @@ export const Budget = () => {
     let [params, setParams] = React.useState(new URLSearchParams(location.search));
     let token = params.get('token');
     let [orcamentos, setOrcamentos] = React.useState([]);
-    let [orcamentosFiltered, setOrcamentosFiltered] = React.useState(orcamentos);
     let [cadastrarNovo, setCadastrarNovo] = React.useState(false);
     let [troca, setTroca] = React.useState(false);
 
     React.useEffect(() => {
         Api({endpoint:'orcamentos', method:'GET', token:token}).then(res => setOrcamentos(res.orcamentos));
-        setOrcamentosFiltered(orcamentos);
     }, [troca]);
 
     const handleDelete = (id) => {

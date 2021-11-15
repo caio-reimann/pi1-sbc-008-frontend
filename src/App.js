@@ -32,16 +32,17 @@ function App() {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/app/*" element={
-                    token ? (
+                <Route path="/app" element={
+                    // token ? (
                         <Layout>
                             <Routes>
                                 <Route path='/' element={<Budget/>} />
                                 <Route path="*" element={<FourOhFour/>} />
                             </Routes>
                         </Layout>
-                    ) : (<Navigate to="/login" />)
+                    // ) : (<Navigate to="/login" />)
                 }/>
+                <Route path="/" exact element={<Navigate to='/login' />} />
             </Routes>
 
             

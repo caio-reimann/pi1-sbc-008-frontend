@@ -1,11 +1,14 @@
 import './style.css';
 import Logo from '../../assets/brand/logo.png';
 import { MdLogout } from 'react-icons/md';
-import {Link, useNavigate} from 'react-router-dom';
-
+import {Link, useNavigate, useLocation} from 'react-router-dom';
+import React from 'react';
 
 export const Layout = ({children}) => {
     const navigate = useNavigate();
+    let location = useLocation();
+    let [params, setParams] = React.useState(new URLSearchParams(location.search));
+    let token = params.get('token');
 
     const handleLogout = () => {
         navigate('/login', { replace: true });
@@ -15,7 +18,7 @@ export const Layout = ({children}) => {
         <div className='layout'>
             <div className='layout--navbar'>
 
-                <Link to={'/app'}>
+                <Link to={`/app?token=${token}`}>
                     <div className='layout--navbar--logo'>
                         <div className='layout--navbar--logo--img' style={{backgroundImage: `url(${Logo})`}}></div>
                         <div className='layout--navbar--logo--text'>Orça Fácil</div>
